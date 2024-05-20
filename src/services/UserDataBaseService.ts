@@ -7,7 +7,13 @@ class UserDataBaseService {
 
   async listDBUsers() {
     try {
-      return await prisma.user.findMany();
+      return await prisma.user.findMany({
+        select: {
+          name: true,
+          email: true,
+          password: false
+        }
+      });
     } catch (error) {
       console.log(error);
       return null;
